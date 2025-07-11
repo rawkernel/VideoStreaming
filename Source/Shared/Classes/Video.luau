@@ -51,27 +51,23 @@ local function ConvertFrameToRGBA(
 	local PixelCount: number = Width * Height
 	local BufferSize: number = PixelCount * 4
 
-	-- Reuse existing buffer if provided and correct size, otherwise create new one
 	local Buffer: buffer = if ReuseBuffer and buffer.len(ReuseBuffer) == BufferSize
 		then ReuseBuffer
 		else buffer.create(BufferSize)
 
-	-- Process pixels directly without palette recomputation
 	for i = 0, PixelCount - 1 do
 		local RawIndex: number = buffer.readu8(FrameBuffer, i)
 		local PaletteIndex: number = RawIndex + 1
 		local AlphaValue: number = buffer.readu8(AlphaBuffer, i)
-		local pixelOffset = i * 4
+		local PixelOffset: number = i * 4
 
-		local PackedColor = PackedPalette[PaletteIndex]
+		local PackedColor: number = PackedPalette[PaletteIndex]
 		if PackedColor then
-			-- Create packed pixel directly from pre-computed palette + alpha
-			local packedPixel = bit32.bor(PackedColor, bit32.lshift(AlphaValue, 24))
-			buffer.writeu32(Buffer, pixelOffset, packedPixel)
+			local PackedPixel: number = bit32.bor(PackedColor, bit32.lshift(AlphaValue, 24))
+			buffer.writeu32(Buffer, PixelOffset, PackedPixel)
 		else
-			-- Fallback: white pixel with alpha (0xAAFFFFFF)
-			local packedPixel = bit32.bor(0x00FFFFFF, bit32.lshift(AlphaValue, 24))
-			buffer.writeu32(Buffer, pixelOffset, packedPixel)
+			local PackedPixel: number = bit32.bor(0x00FFFFFF, bit32.lshift(AlphaValue, 24))
+			buffer.writeu32(Buffer, PixelOffset, PackedPixel)
 		end
 	end
 
@@ -92,8 +88,7 @@ function Methods._BindImageUpdate(self: Schema): RBXScriptConnection
 			local Buffer: buffer = self.VideoData.Frames[self._CurrentFrame]
 			local AlphaBuffer: buffer = self.VideoData.Alphas[self._CurrentFrame]
 
-			-- Get buffer from pool for reuse
-			local poolBuffer = self._BufferPool[self._BufferPoolIndex]
+			local poolBuffer: buffer = self._BufferPool[self._BufferPoolIndex]
 			local RGBABuffer: buffer = ConvertFrameToRGBA(
 				Buffer,
 				AlphaBuffer,
@@ -103,7 +98,6 @@ function Methods._BindImageUpdate(self: Schema): RBXScriptConnection
 				poolBuffer
 			)
 
-			-- Store buffer back in pool for next frame and cycle index
 			self._BufferPool[self._BufferPoolIndex] = RGBABuffer
 			self._BufferPoolIndex = (self._BufferPoolIndex % 3) + 1
 
@@ -183,21 +177,18 @@ function Video.new(Video: string, EditableImage: EditableImage, Configs: Configs
 	if not VideoData.Frames or #VideoData.Frames == 0 then return nil end
 	if not VideoData.Alphas or #VideoData.Alphas == 0 then return nil end
 
-	-- Pre-compute palette colors as packed 32-bit integers ONCE during initialization
 	local PackedPalette: { [number]: number } = {}
-	for index, colorBuffer in VideoData.Palette do
-		if colorBuffer then
-			local r = buffer.readu8(colorBuffer, 0)
-			local g = buffer.readu8(colorBuffer, 1)
-			local b = buffer.readu8(colorBuffer, 2)
-			-- Pack RGB into lower 24 bits: 0x00BBGGRR
-			PackedPalette[index] = bit32.bor(bit32.bor(r, bit32.lshift(g, 8)), bit32.lshift(b, 16))
+	for Index: never, ColorBuffer: never in VideoData.Palette do
+		if ColorBuffer then
+			local R: number = buffer.readu8(ColorBuffer, 0)
+			local G: number = buffer.readu8(ColorBuffer, 1)
+			local B: number = buffer.readu8(ColorBuffer, 2)
+			PackedPalette[Index] = bit32.bor(bit32.bor(R, bit32.lshift(G, 8)), bit32.lshift(B, 16))
 		end
 	end
 
-	-- Initialize buffer pool for frame reuse (3 buffers for smooth playback)
 	local BufferPool: { buffer } = {}
-	local BufferSize = (VideoData :: FileStreaming.Video).Width * (VideoData :: FileStreaming.Video).Height * 4
+	local BufferSize: never = (VideoData :: FileStreaming.Video).Width * (VideoData :: FileStreaming.Video).Height * 4
 	for i = 1, 3 do
 		BufferPool[i] = buffer.create(BufferSize)
 	end
@@ -232,7 +223,6 @@ function Methods.Destroy(self: Schema): ()
 	self.State = "Stopped"
 	if self._Connection then self._Connection:Disconnect() end
 
-	-- Clear buffer pool to free memory
 	table.clear(self._BufferPool)
 end
 
