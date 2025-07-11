@@ -70,16 +70,13 @@ function FileStreaming.ParseBuffer(Buffer: buffer): Video
 			buffer.writeu8(AlphaBuffer, j, AlphaValue)
 		end
 		Alphas[i] = AlphaBuffer
-	end -- Use appropriate FPS for GIFs - Rick Roll should be snappy, not sluggish
-	-- Rick Roll GIFs typically run at 20-25 FPS to maintain the energy
+	end
+
 	local EstimatedFPS: number = 24
 
-	-- Adjust based on frame count for optimal playback
 	if FrameCount <= 20 then
-		-- Very short clips can be faster
 		EstimatedFPS = 30
 	elseif FrameCount >= 100 then
-		-- Longer animations might be 18 FPS for smoothness vs file size
 		EstimatedFPS = 18
 	end
 

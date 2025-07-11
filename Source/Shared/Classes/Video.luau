@@ -81,11 +81,9 @@ function Methods._BindImageUpdate(self: Schema): RBXScriptConnection
 
 		local CurrentTick: number = tick()
 
-		-- Calculate proper frame timing based on video FPS
-		local VideoFrameTime: number = 1 / self.VideoData.FPS -- Time each video frame should be displayed
+		local VideoFrameTime: number = 1 / self.VideoData.FPS
 		local TimeSinceLastUpdate: number = CurrentTick - self._LastUpdateTick
 
-		-- Only update when enough time has passed for the next video frame
 		if TimeSinceLastUpdate >= VideoFrameTime then
 			local Buffer: buffer = self.VideoData.Frames[self._CurrentFrame]
 			local AlphaBuffer: buffer = self.VideoData.Alphas[self._CurrentFrame]
@@ -117,8 +115,6 @@ function Methods._BindImageUpdate(self: Schema): RBXScriptConnection
 				end
 			end
 
-			-- Simple timing update - just set to current time
-			-- This ensures consistent frame rate without drift accumulation
 			self._LastUpdateTick = CurrentTick
 		end
 	end)
@@ -152,7 +148,6 @@ function Methods.Resume(self: Schema): ()
 	end
 
 	self.State = "Playing"
-	-- Reset timing to prevent immediate frame advancement
 	self._LastUpdateTick = tick()
 end
 
@@ -173,11 +168,8 @@ function Video.new(Video: string, EditableImage: EditableImage, Configs: Configs
 		return nil
 	end
 
-	-- Validate video data integrity
 	if not VideoData.Palette or #VideoData.Palette == 0 then return nil end
-
 	if not VideoData.Frames or #VideoData.Frames == 0 then return nil end
-
 	if not VideoData.Alphas or #VideoData.Alphas == 0 then return nil end
 
 	local RawSelf: RawSchema = {
@@ -185,7 +177,7 @@ function Video.new(Video: string, EditableImage: EditableImage, Configs: Configs
 		_EditableImage = EditableImage or nil,
 		_Paused = false,
 		_CurrentFrame = 1,
-		_LastUpdateTick = tick(), -- Initialize with current time for proper timing
+		_LastUpdateTick = tick(),
 		_Configs = Configs,
 
 		Video = Video,
