@@ -1,0 +1,10 @@
+syntax = 'Luau'
+collapse_simple_statement = 'ConditionalOnly'
+space_after_function_names = 'Never'
+call_parentheses = 'Always'
+quote_style = 'AutoPreferDouble'
+line_endings = 'Unix'
+indent_type = 'Tabs'
+
+[sort_requires]
+enabled = true

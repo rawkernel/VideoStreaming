@@ -1,0 +1,41 @@
+{
+  "[luau]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "JohnnyMorganz.stylua"
+	},
+
+	"stylua.targetReleaseVersion": "latest",
+	
+	"luau-lsp.fflags.enableNewSolver": true,
+	"luau-lsp.completion.imports.enabled": true,
+
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"prettier.useTabs": true,
+	
+	"luau-lsp.completion.imports.requireStyle": "alwaysAbsolute",
+	"luau-lsp.completion.imports.stringRequires.enabled": false,
+	"luau-lsp.completion.imports.suggestRequires": true,
+	
+	"luau-lsp.types.definitionFiles": [ "Types/globals.d.luau" ],
+	
+	"luau-lsp.sourcemap.autogenerate": false,
+	"luau-lsp.sourcemap.enabled": true,
+	"luau-lsp.sourcemap.includeNonScripts": true,
+	
+	"luau-lsp.sourcemap.sourcemapFile": "sourcemap.json",
+	
+	"editor.formatOnSave": true,
+
+  	"luau-lsp.hover.multilineFunctionDefinitions": true,
+	"luau-lsp.hover.showTableKinds": true,
+	"luau-lsp.plugin.enabled": true,
+	"luau-lsp.inlayHints.variableTypes": true,
+	"luau-lsp.inlayHints.parameterTypes": true,
+	"luau-lsp.inlayHints.hideHintsForErrorTypes": true,
+	"luau-lsp.inlayHints.functionReturnTypes": true,
+	"luau-lsp.completion.showPropertiesOnMethodCall": true,
+	"luau-lsp.completion.imports.separateGroupsWithLine": true,
+	"luau-lsp.completion.enableFragmentAutocomplete": false,
+	"luau-lsp.completion.autocompleteEnd": true
+}

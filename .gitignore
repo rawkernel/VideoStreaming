@@ -1,0 +1,10 @@
+.pesde/
+
+roblox_packages/
+lune_packages/
+luau_packages/
+
+Types/globalTypes.d.luau
+sourcemap.json
+
+pesde.lock

@@ -1,0 +1,193 @@
+{
+	"emitLegacyScripts": false,
+	"name": "VideoStreaming",
+	"tree": {
+		"$className": "DataModel",
+
+		"ReplicatedFirst": {
+			"$ignoreUnknownInstances": true,
+			
+			"Packages": {
+				"$path": "roblox_packages"
+			}
+		},
+
+		"ReplicatedStorage": {
+			"$ignoreUnknownInstances": true,
+
+			"Client": {
+				"$path": "Source/Client/Scripts"
+			},
+			"Classes": {
+				"$path": "Source/Shared/Classes"
+			},
+			"Modules": {
+				"$path": "Source/Shared/Modules"
+			},
+			"Types": {
+				"$path": "Source/Shared/Types"
+			},
+
+			"Configuration": {
+				"$path": "Source/Config"
+			}
+		},
+
+		"ServerScriptService": {
+			"$ignoreUnknownInstances": true,
+
+			"Server": {
+				"$path": "Source/Server"
+			}
+		},
+
+		"ServerStorage": {
+			"$ignoreUnknownInstances": true,
+			"$path": "Storage/Server"
+		},
+
+		"Workspace": {
+			"$ignoreUnknownInstances": true,
+
+			"Demonstration": {
+				"$className": "Folder",
+				"VideoPart": {
+					"$className": "Part",
+					"$properties": {
+						"Locked": true,
+						"CastShadow": false,
+						"Color": [0.65, 0.65, 0.65],
+						"Material": "SmoothPlastic",
+
+						"Size": [32, 15, 2],
+						"Position": [0, 7.5, -25],
+
+						"EnableFluidForces": false,
+
+						"CanCollide": false,
+						"CanTouch": false,
+						"AudioCanCollide": false,
+
+						"Anchored": true,
+						"Massless": true
+					},
+					"VideoGui": {
+						"$className": "SurfaceGui",
+						"$properties": {
+							"Active": false,
+							"Face": "Back",
+							"LightInfluence": 0
+						},
+						"Video": {
+							"$className": "ImageLabel",
+							"$properties": {
+								"AnchorPoint": [0.5, 0.5],
+								"BackgroundColor3": [1, 1, 1],
+								"BackgroundTransparency": 1,
+								"BorderSizePixel": 0,
+								"Position": {"UDim2": [[0.5, 0], [0.5, 0]]},
+								"Size": {"UDim2": [[0.75, 0], [0.75, 0]]}
+							},
+							"UIAspectRatioConstraint": {
+								"$className": "UIAspectRatioConstraint",
+								"$properties": {
+									"AspectRatio": 1,
+									"AspectType": "FitWithinMaxSize",
+									"DominantAxis": "Width"
+								}
+							}
+						}
+					}
+				}
+			},
+
+			"Baseplate": {
+				"$className": "Part",
+				"$properties": {
+					"Locked": true,
+					"CastShadow": false,
+					"Color": [0.35, 0.35, 0.35],
+					"Material": "SmoothPlastic",
+
+					"Size": [2048, 16, 2048],
+					"Position": [0, -8, 0],
+
+					"EnableFluidForces": false,
+
+					"CanCollide": true,
+					"CanTouch": false,
+					"AudioCanCollide": false,
+
+					"Anchored": true,
+					"Massless": true
+				},
+				"Texture": {
+					"$className": "Texture",
+					"$properties": {
+						"Color3": [0, 0, 0],
+						"StudsPerTileU": 8,
+						"StudsPerTileV": 8,
+						"Texture": "rbxassetid://6372755229",
+						"Transparency": 0.8,
+						"Face": "Top"
+					}
+				}
+			}
+		},
+
+		"Lighting": {
+			"$className": "Lighting",
+
+			"$properties": {
+				"Ambient": [0.3, 0.3, 0.3],
+				"Brightness": 3,
+				"ColorShift_Bottom": [0, 0, 0],
+				"ColorShift_Top": [0, 0, 0],
+				"EnvironmentDiffuseScale": 1,
+				"EnvironmentSpecularScale": 1,
+				"GlobalShadows": false,
+				"LightingStyle": "Soft",
+				"OutdoorAmbient": [0.3, 0.3, 0.3],
+				"PrioritizeLightingQuality": false,
+
+				"ClockTime": 14.5,
+				"GeographicLatitude": 0,
+
+				"ExposureCompensation": 0,
+
+				"FogColor": [0, 0, 0],
+				"FogEnd": 100000,
+				"FogStart": 0
+			},
+			"Atmosphere": {
+				"$className": "Atmosphere",
+				"$properties": {
+					"Density": 0.3,
+					"Offset": 0.25,
+
+					"Color": [0.8, 0.8, 0.8],
+					"Decay": [0.4, 0.45, 0.5],
+					"Glare": 0,
+					"Haze": 0
+				}
+			},
+			"Sky": {
+				"$className": "Sky",
+				"$properties": {
+					"CelestialBodiesShown": true,
+					"MoonAngularSize": 11,
+					"StarCount": 3000,
+					"SunAngularSize": 11,
+					"MoonTextureId": "rbxassetid://6444320592",
+					"SkyboxBk": "rbxassetid://6444884337",
+					"SkyboxDn": "rbxassetid://6444884785",
+					"SkyboxFt": "rbxassetid://6444884337",
+					"SkyboxLf": "rbxassetid://6444884337",
+					"SkyboxRt": "rbxassetid://6444884337",
+					"SkyboxUp": "rbxassetid://6412503613",
+					"SunTextureId": "rbxassetid://6196665106"
+				}
+			}
+		}
+	}
+}
